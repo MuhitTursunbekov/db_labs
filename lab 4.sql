@@ -70,7 +70,7 @@ UPDATE boxes
  SET value = value * 0.85
   WHERE value = (SELECT DISTINCT ON(value) value
                     FROM boxes ORDER BY value DESC
-                        OFFSET 2 LIMIT 1);
+                        OFFSET 3  LIMIT 1);
 
 
 DELETE FROM boxes WHERE value < 150
@@ -82,9 +82,3 @@ DELETE FROM boxes
                                  WHERE location = 'New York')
 RETURNING *;
 
---or
-DELETE FROM boxes
-USING warehouses
- WHERE boxes.warehouse = warehouses.code
-  AND warehouses.location = 'New York'
-RETURNING boxes.*;
